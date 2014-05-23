@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="content">
+		
+			<h:form prependId="false">
+			<div id="Page">
+				<div id="Page_center">
+					<span class="blue2" style="font-size: 15px">Próximos cursos</span><br />
+		
+					<p:dataTable emptyMessage="No se han encontrado cursos" paginator="true" rows="4" var="proxCurso" 
+						value="${sessionScope['listaCursos']}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+						rowsPerPageTemplate="4,6,8,10,12" rowKey="${proxCurso.id}">
+
+						<p:column width="150" headerText="Nombre">
+							<h:inputTextarea value="${proxCurso.nombre}" style="border: 0px; width: 100%" readonly="true" rows="6"/>
+						</p:column>
+
+						<p:column headerText="Descripción">
+							<h:inputTextarea value="${proxCurso.descripcion}" style="border: 0px; width: 100%" readonly="true" rows="6"/>
+						</p:column>
+						
+						<p:column width="70" sortBy="${proxCurso.fecha}">
+							<f:facet name="header">
+								<h:outputLabel>Fecha</h:outputLabel><br/>
+								<h:outputLabel styleClass="subtituloTabla">Precio</h:outputLabel>
+							</f:facet>
+							<h:outputLabel value="${proxCurso.fecha}" rendered="${proxCurso.fecha != null}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputLabel>
+							<h:outputLabel value="Sin definir" rendered="${proxCurso.fecha == null}"/>
+							<br/>
+							<h:outputLabel value="${proxCurso.precio} €" rendered="${proxCurso.precio > 0}" styleClass="subtituloTabla"/>
+							<h:outputLabel value="Gratis" rendered="${proxCurso.precio eq 0}" styleClass="subtituloTabla"/>
+						</p:column>
+						
+						<p:column width="70">
+							<f:facet name="header">
+								<h:outputLabel>Nº Alumnos</h:outputLabel><br/>
+								<h:outputLabel styleClass="subtituloTabla">Profesor</h:outputLabel>
+							</f:facet>
+							<h:outputLabel value="${proxCurso.numeroAlumnos}" rendered="${proxCurso.numeroAlumnos > 0}"/>
+							<h:outputLabel value="Sin definir" rendered="${proxCurso.numeroAlumnos eq 0}"/>
+							<br/>
+							<h:outputLabel value="${proxCurso.profesor}" rendered="${proxCurso.profesor != null and not empty proxCurso.profesor}" styleClass="subtituloTabla"/>
+							<h:outputLabel value="Sin definir" rendered="${proxCurso.profesor == null or empty proxCurso.profesor}" styleClass="subtituloTabla"/>
+						</p:column>
+						
+					</p:dataTable>
+
+				</div>
+			</div>
+
+		</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

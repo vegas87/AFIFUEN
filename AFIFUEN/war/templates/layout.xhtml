@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<meta name="DESCRIPTION" content="Asociaci&oacute;n de fibromialgia y s&iacute;ndrome de fatiga cr&oacute;nica"/>
+	<meta name="KEYWORDS" content="Fibromialgia, s&iacute;ndrome fatiga, cr&oacute;nica, AFIFUEN, Fuenlabrada, asociaci&oacute;n"/>
+	<meta name="skype toolbar" content="skype_toolbar_parser_compatible"/>
+	<meta name="verify-v1" content="INRkG7lnxWk6YKPUailqLpThcrn0TplgS3O+ZIh6eKk="/>
+	<meta name="ROBOTS" content="index,follow"/>
+<title>AFIFUEN - Fuenlabrada</title>
+
+<!-- <link type="text/css" rel="stylesheet" href="/css/estilos.css" /> -->
+<link type="text/css" rel="stylesheet" href="/css/default.css" />
+	
+</h:head>
+
+<h:body>
+
+<p:growl id="growl" autoUpdate="true" />
+
+<p:dialog modal="true" widgetVar="cargando" draggable="false" closable="false" resizable="false" header="Cargando..."
+	width="300" style="text-align: center">  
+	<table cellspacing="0" cellpadding="0" style="width: 100%;border-bottom:0px solid #c0c0c0;padding-top:10px;">
+	<tr><td ><b><span class="blue">espere un momento</span> </b> </td></TR>
+	<tr><td><p:graphicImage value="/images/ajax_loader.gif" style="margin-top: 10px; margin-bottom: 10px;"/></td></tr>
+	</table>
+    
+    
+</p:dialog> 
+
+<f:view>
+<div id="WholePage">
+<div id="Container">
+	<ui:include src="/sections/cabecera.xhtml"/>
+	
+	<div id="CentralPart">
+		<!-- Menú de la izquierda con las opciones, el login y el banner -->
+        <ui:include src="/sections/menu.xhtml"/>
+        
+        <div id="RightPart">
+        <!-- Contenido principal -->
+			<ui:insert name="content" />
+		</div>
+        <div class="cleaner"></div>
+	</div>
+</div>
+</div>
+</f:view>
+
+</h:body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+ <h:body>
+
+<ui:composition >
+	
+	<h:form id="cabeceraForm" prependId="false">
+		<div id="Head">
+			<div id="Head_left">
+          		<div id="Leaf_top"></div>
+          		<!--<div id="Leaf_bottom"> <a class="registration" onclick="alert('En desarrollo');">REGISTRATION</a> <a class="log-in" onclick="alert('En desarrollo');">LOG IN</a> </div>-->
+        		</div>
+        	<div id="Head_right">
+          		<div id="Logo">
+            		<div id="Name"><span class="blue">A</span>sociación de <span class="blue">F</span>ibromialgia y <span class="blue">S</span>índrome de <span class="blue">F</span>atiga <span class="blue">C</span>rónica</div>
+            		<!--<div id="Informations">Good afternoon | It's Friday | Time: 12:51 </div>-->
+          		</div>		  
+		  		<div id="Top_menu" align="left"> 
+					<a class="menuInicio" href="/faces/sections/inicio.xhtml"><span>Inicio</span></a> 
+					<a class="menuEnfermedad" onclick="alert('En desarrollo');"><span>La enfermedad</span></a> 
+					<h:commandLink styleClass="menuActividades" value="Actividades" action="${actividadBean.cargarActividades}"/>
+					<h:commandLink styleClass="menuTalleres" value="Talleres y cursos" action="${tallerBean.cargarTalleresYCursos}"/>	
+					<a class="menuMercadillo" onclick="alert('En desarrollo');"><span>Mercadillo</span></a>
+					<a class="menuContacto" onclick="alert('En desarrollo');"><span>Contacto</span></a>
+		  		</div>
+		  		<div id="Corner_menu"/>
+        	</div>
+      	</div>
+	</h:form>
+
+</ui:composition>
+</h:body>
+</html>

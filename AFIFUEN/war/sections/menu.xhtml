@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<h:body>
+
+	<ui:composition>
+		<h:form id="menuForm" prependId="false">
+			<div id="LeftPart">
+				<div id="Menu">
+					<div id="Menu_header">
+						<div class="menu_header_left">
+							<span class="menu_text">MENU</span>
+						</div>
+						<div class="menu_header_right"></div>
+					</div>
+					<div id="Menu_content">
+						<h:commandLink styleClass="menu_item" value="Actividades" action="${actividadBean.cargarActividades}"/><br/>
+						<h:commandLink styleClass="menu_item" value="Talleres y cursos" action="${tallerBean.cargarTalleresYCursos}"/><br/>
+						<h:commandLink styleClass="menu_item2" value="Próximos talleres" action="${tallerBean.cargarProximosTalleres}"/><br/>
+						<h:commandLink styleClass="menu_item2" value="Talleres" action="${tallerBean.cargarTalleres}"/><br/>
+						<h:commandLink styleClass="menu_item2" value="Próximos cursos" action="${tallerBean.cargarProximosCursos}"/><br/>
+						<h:commandLink styleClass="menu_item2" value="Cursos" action="${tallerBean.cargarCursos}"/><br/>
+						<a class="menu_item" onclick="alert('En desarrollo');"><span>Mercadillo solidario</span></a><br /> 
+						<a class="menu_item" onclick="alert('En desarrollo');"><span>Acerca de la enfermedad</span></a><br /> 
+						<a class="menu_item2" onclick="alert('En desarrollo');"><span>¿Qué es la Fibromialgia?</span></a><br /> 
+						<a class="menu_item2" onclick="alert('En desarrollo');"><span>Síntomas</span></a><br />
+						<a class="menu_item2" onclick="alert('En desarrollo');"><span>¿Cómo vivir con ella?</span></a><br />
+						<!--<a class="menu_item2" onclick="alert('En desarrollo');"><span>Información sobre la enfermedad</span></a><br/>
+	              <a class="menu_item2" onclick="alert('En desarrollo');"><span>Morbi sit amet augue</span></a><br/>
+	              <a class="menu_item2" onclick="alert('En desarrollo');"><span>In hac habitasse platea dictumst</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Donec sed mauris sit amet</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>In sollicitudin cursus purus</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Lorem ipsum</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Nulla facilisi</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Suspendisse ipsum</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Aliquam volutpat auctor</span></a><br/>
+	              <a class="menu_item" onclick="alert('En desarrollo');"><span>Suspendisse scelerisque</span></a><br/>-->
+					</div>
+				</div>
+				<div id="Poll">
+					<div id="Poll_header">
+						<div class="menu_header_left">
+							<span class="menu_text">ACCESO USUARIOS</span>
+						</div>
+						<div class="menu_header_right"></div>
+					</div>
+					<div id="Poll_content">
+	              	<c:if test="${sessionScope['usuario'] == null}">
+						<table>
+							<tr>
+								<div valign="center">
+									<td class="poll_unswer">Usuario:</td>
+									<td><h:inputText value="${usuarioBean.usuario}" style="width: 100px; margin-left: 10px"/></td>
+								</div>
+							</tr>
+							<tr>
+								<div valign="center">
+									<td class="poll_unswer">Contraseña:</td>
+									<td><h:inputSecret value="${usuarioBean.password}" style="width: 100px; margin-left: 10px"/></td>
+								</div>
+							</tr>
+						</table>
+						<p:defaultCommand target="linkLogin"/>
+						<a class="poll_unswer" style="margin-left: 75px;"><span><p:commandLink id="linkLogin" styleClass="poll_unswer" value="Entrar" action="${usuarioBean.login}" onclick="cargando.show()" oncomplete="cargando.hide()" update=":menuForm,:growl"/></span></a><br />
+					</c:if>
+					<c:if test="${sessionScope['usuario'] != null}">
+						<h:panelGrid style="margin: 0" columns="1">
+							<h:outputLabel styleClass="poll_unswer" style="font-weight: bold;" value="${sessionScope['usuario'].nombreAsStr}"/>
+							<h:column><a class="poll_unswer" style="margin-left: 75px;"><span><p:commandLink styleClass="poll_unswer" value="Salir" action="${usuarioBean.logout}" update=":menuForm,:growl"/></span></a><br /></h:column>
+						</h:panelGrid>
+					</c:if>
+					</div>
+				</div>
+				<div id="Banner">
+					<img src="../../img/banner.jpg" alt="" />
+				</div>
+			</div>
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>

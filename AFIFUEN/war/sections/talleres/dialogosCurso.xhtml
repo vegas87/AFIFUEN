@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<p:dialog id="idDialogoDetalleCurso"
+		widgetVar="dialogoDetalleCurso"
+		modal="true"
+		width="610"
+		appendToBody="true"
+		closable="false"
+		header="Detalle de curso">
+		
+		<h:form>
+			<p:defaultCommand target="guardarCurso"/>
+			<h:panelGrid columns="2" style="height: 230px">
+				
+				<h:outputLabel style="font-weight: bold" value="Nombre: *"/>
+				<p:inputText id="nombreCurso" value="${sessionScope['curso'].nombre}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Descripción: *"/>
+				<p:inputTextarea id="descripcionCurso" value="${sessionScope['curso'].descripcion}" rows="5" style="margin-left: 10px; width: 470px" autoResize="false"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Fecha:"/>
+				<p:calendar value="${sessionScope['curso'].fecha}" style="margin-left: 10px" mode="popup" showOn="button" size="11"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Precio:"/>
+				<p:inputText value="${sessionScope['curso'].precio}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Nº Alumnos:"/>
+				<p:inputText value="${sessionScope['curso'].numeroAlumnos}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Profesor:"/>
+				<p:inputText value="${sessionScope['curso'].profesor}" style="margin-left: 10px" size="90"/>
+				
+			</h:panelGrid>
+			
+			<h:panelGroup style="margin-top: 10px; float: right">
+				<p:commandButton id="guardarCurso" value="Guardar" action="${tallerBean.guardarCurso}" onclick="cargando.show()" oncomplete="cargando.hide();dialogoDetalleCurso.hide()" update=":idDialogoDetalleCurso,:cursosForm:tablaCursos"/>
+				<p:commandButton value="Cancelar" onclick="dialogoDetalleCurso.hide()"/>
+			</h:panelGroup>
+		</h:form>
+	
+	</p:dialog>
+	
+	<p:confirmDialog widgetVar="borradoCurso"
+		appendToBody="true"
+		closable="false"
+		header="Confirmación de borrado"
+		message="Se va a borrar el curso seleccionado. ¿Desea continuar?">
+	
+		<h:panelGrid columns="2" style="float: right">
+			<p:commandButton value="Borrar" action="${tallerBean.borrarCurso}" onclick="cargando.show()" oncomplete="cargando.hide();borradoCurso.hide()" update=":cursosForm:tablaCursos"/>
+			<p:commandButton value="Cancelar" style="margin-left: 2px" onclick="cargando.show()" oncomplete="cargando.hide();borradoCurso.hide()"/>
+		</h:panelGrid>
+		
+	</p:confirmDialog>
+
+</h:body>
+</html>

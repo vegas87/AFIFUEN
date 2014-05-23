@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<p:dialog id="idDialogoDetalleTaller"
+		widgetVar="dialogoDetalleTaller"
+		modal="true"
+		width="610"
+		appendToBody="true"
+		closable="false"
+		header="Detalle de taller">
+		
+		<h:form>
+			<p:defaultCommand target="guardarTaller"/>
+			<h:panelGrid columns="2" style="height: 230px">
+				
+				<h:outputLabel style="font-weight: bold" value="Nombre: *"/>
+				<p:inputText id="nombreTaller" value="${sessionScope['taller'].nombre}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Descripción: *"/>
+				<p:inputTextarea id="descripcionTaller" value="${sessionScope['taller'].descripcion}" rows="5" style="margin-left: 10px; width: 470px" autoResize="false"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Fecha:"/>
+				<p:calendar value="${sessionScope['taller'].fecha}" style="margin-left: 10px" mode="popup" showOn="button" size="11"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Precio:"/>
+				<p:inputText value="${sessionScope['taller'].precio}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Nº Alumnos:"/>
+				<p:inputText value="${sessionScope['taller'].numeroAlumnos}" style="margin-left: 10px" size="90"/>
+				
+				<h:outputLabel style="font-weight: bold" value="Profesor:"/>
+				<p:inputText value="${sessionScope['taller'].profesor}" style="margin-left: 10px" size="90"/>
+				
+			</h:panelGrid>
+			
+			<h:panelGroup style="margin-top: 10px; float: right">
+				<p:commandButton id="guardarTaller" value="Guardar" action="${tallerBean.guardarTaller}" onclick="cargando.show()" oncomplete="cargando.hide();dialogoDetalleTaller.hide()" update=":idDialogoDetalleTaller,:talleresForm:tablaTalleres"/>
+				<p:commandButton value="Cancelar" onclick="dialogoDetalleTaller.hide()"/>
+			</h:panelGroup>
+		</h:form>
+	
+	</p:dialog>
+	
+	<p:confirmDialog widgetVar="borradoTaller"
+		appendToBody="true"
+		closable="false"
+		header="Confirmación de borrado"
+		message="Se va a borrar el taller seleccionado. ¿Desea continuar?">
+	
+		<h:panelGrid columns="2" style="float: right">
+			<p:commandButton value="Borrar" action="${tallerBean.borrarTaller}" onclick="cargando.show()" oncomplete="cargando.hide();borradoTaller.hide()" update=":talleresForm:tablaTalleres"/>
+			<p:commandButton value="Cancelar" style="margin-left: 2px" onclick="cargando.show()" oncomplete="cargando.hide();borradoTaller.hide()"/>
+		</h:panelGrid>
+		
+	</p:confirmDialog>
+
+</h:body>
+</html>

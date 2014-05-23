@@ -1,0 +1,19 @@
+<!-- Indices written at Fri, 23 May 2014 18:05:51 CEST -->
+
+<datastore-indexes>
+
+    <!-- Used 11 times in query history -->
+    <datastore-index kind="TallerDTO" ancestor="false" source="auto">
+        <property name="idestado" direction="asc"/>
+        <property name="tipoActividad" direction="asc"/>
+        <property name="fecha" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 9 times in query history -->
+    <datastore-index kind="TallerDTO" ancestor="false" source="auto">
+        <property name="idestado" direction="asc"/>
+        <property name="tipoActividad" direction="asc"/>
+        <property name="fechaAlta" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

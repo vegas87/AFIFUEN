@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="content">
+		
+			<ui:include src="/sections/talleres/dialogosCurso.xhtml"/>
+	
+			<h:form id="cursosForm" prependId="false">
+			<p:remoteCommand autoRun="true" action="${tallerBean.cargarCursos}"/>
+			<div id="Page">
+				<div id="Page_center">
+					<span class="blue2" style="font-size: 15px">Cursos impartidos en la asociación</span><br />
+		
+					<p:dataGrid id="tablaCursos" columns="2" emptyMessage="No se han encontrado cursos" paginator="true" rows="4" var="curso" 
+						value="${sessionScope['listaCursos']}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+						rowsPerPageTemplate="4,6,8,10,12">
+						
+						<p:column>
+							<p:panel header="${curso.nombre}">
+								<h:panelGrid columns="2" width="100%">
+									<h:outputLabel style="font-weight: bold" value="Descripción:"/>
+									<h:inputTextarea value="${curso.descripcion}" style="margin-left: 10px; border: 0px; width: 100%" readonly="true" rows="6"/>
+									
+									<h:outputLabel style="font-weight: bold" value="Fecha:"/>
+									<h:outputLabel value="${curso.fecha}" style="margin-left: 10px" rendered="${curso.fecha != null}">
+										<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:outputLabel>
+									<h:outputLabel value="Sin definir" style="margin-left: 10px" rendered="${curso.fecha == null}"/>
+									
+									<h:outputLabel style="font-weight: bold" value="Precio:"/>
+									<h:outputLabel value="${curso.precio} €" rendered="${curso.precio > 0}" style="margin-left: 10px"/>
+									<h:outputLabel value="Gratis" rendered="${curso.precio eq 0}" style="margin-left: 10px"/>
+									
+									<h:outputLabel style="font-weight: bold" value="Nº Alumnos:"/>
+									<h:outputLabel value="${curso.numeroAlumnos}" rendered="${curso.numeroAlumnos > 0}" style="margin-left: 10px"/>
+									<h:outputLabel value="Sin definir" rendered="${curso.numeroAlumnos eq 0}" style="margin-left: 10px"/>
+									
+									<h:outputLabel style="font-weight: bold" value="Profesor:"/>
+									<h:outputLabel value="${curso.profesor}" style="margin-left: 10px" rendered="${curso.profesor != null and not empty curso.profesor}"/>
+									<h:outputLabel value="Sin definir" style="margin-left: 10px" rendered="${curso.profesor == null or empty curso.profesor}"/>
+									
+									<p:spacer/>
+									<h:panelGroup rendered="${sessionScope['usuario'] != null and sessionScope['usuario'].codigo eq 'afifuen_admin'}">
+									<div style="height: 20px; margin-top: 5px; margin-right: -10px;">
+										<p:commandButton value="Borrar" style="float: right; margin-left: 2px" onclick="cargando.show()" oncomplete="cargando.hide();borradoCurso.show()">
+											<f:setPropertyActionListener target="${sessionScope['curso']}" value="${curso}"/>
+										</p:commandButton>
+										<p:commandButton value="Editar" style="float: right" onclick="cargando.show()" oncomplete="cargando.hide();dialogoDetalleCurso.show()" update=":idDialogoDetalleCurso,:growl">
+											<f:setPropertyActionListener target="${sessionScope['curso']}" value="${curso}"/>
+										</p:commandButton>
+									</div>
+									</h:panelGroup>
+								</h:panelGrid>
+							</p:panel>
+						</p:column>
+						
+					</p:dataGrid>
+					
+					<h:panelGroup style="margin-top: 5px; float: right" rendered="${sessionScope['usuario'] != null and sessionScope['usuario'].codigo eq 'afifuen_admin'}">
+						<p:commandButton value="Nuevo curso" action="${tallerBean.mostrarNuevoCurso}" onclick="cargando.show()" oncomplete="cargando.hide();dialogoDetalleCurso.show()" update=":idDialogoDetalleCurso,:growl"/>
+					</h:panelGroup>
+
+				</div>
+			</div>
+
+		</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>INICIO</from-outcome>
+			<to-view-id>/sections/inicio.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>ACTIVIDADES</from-outcome>
+			<to-view-id>/sections/actividades/actividades.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>TALLERES_CURSOS</from-outcome>
+			<to-view-id>/sections/talleres/talleresYCursos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>TALLERES</from-outcome>
+			<to-view-id>/sections/talleres/talleres.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>PROXIMOS_TALLERES</from-outcome>
+			<to-view-id>/sections/talleres/proximosTalleres.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>CURSOS</from-outcome>
+			<to-view-id>/sections/talleres/cursos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<redirect>true</redirect>
+			<from-outcome>PROXIMOS_CURSOS</from-outcome>
+			<to-view-id>/sections/talleres/proximosCursos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+</faces-config>

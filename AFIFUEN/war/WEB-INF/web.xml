@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<display-name>AFIFUEN</display-name>
+
+	<!-- JSF Context Configuration' s Path definition -->
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>
+	     /WEB-INF/faces-config.xml
+	     </param-value>
+	</context-param>
+
+	<!-- GAE 1.6.3 cannot handle server side (default) session management. Uses 
+		client -->
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
+	<context-param>
+		<description>Evita que se procesen los comentarios de las páginas</description>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+ 	</context-param> 
+
+
+	<!-- Project Stage Level -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Production</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>
+            If this parameter is set to true and the submitted value of a component is
+            the empty string, the submitted value will be set to null
+        </description>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<!-- MyFaces specific parameters -->
+	<context-param>
+		<description>Only applicable if state saving method is "server" (= default).
+            Defines the amount (default = 20) of the latest views are stored in session.</description>
+		<param-name>org.apache.myfaces.NUMBER_OF_VIEWS_IN_SESSION</param-name>
+		<param-value>20</param-value>
+	</context-param>
+	<context-param>
+		<description>Only applicable if state saving method is "server" (= default).
+            If true (default) the state will be serialized to a byte stream before it
+            is written to the session.
+            If false the state will not be serialized to a byte stream.</description>
+		<param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Only applicable if state saving method is "server" (= default) and if
+            org.apache.myfaces.SERIALIZE_STATE_IN_SESSION is true (= default)
+            If true (default) the serialized state will be compressed before it
+            is written to the session. If false the state will not be compressed.</description>
+		<param-name>org.apache.myfaces.COMPRESS_STATE_IN_SESSION</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>This parameter tells MyFaces if javascript code should be allowed in the
+            rendered HTML output.
+            If javascript is allowed, command_link anchors will have javascript code
+            that submits the corresponding form.
+            If javascript is not allowed, the state saving info and nested parameters
+            will be added as url parameters.
+            Default: "true"</description>
+		<param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+		<param-value>true</param-value>
+	</context-param>	 
+	<context-param>
+		<param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>If true, rendered HTML code will be formatted, so that it is "human readable".
+            i.e. additional line separators and whitespace will be written, that do not
+            influence the HTML code.
+            Default: "true"</description>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>If true, a javascript function will be rendered that is able to restore the
+            former vertical scroll on every request. Convenient feature if you have pages
+            with long lists and you do not want the browser page to always jump to the top
+            if you trigger a link or button action that stays on the same page.
+            Default: "false"</description>
+		<param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Used for encrypting view state. Only relevant for client side
+            state saving. See MyFaces wiki/web site documentation for instructions
+            on how to configure an application for diffenent encryption strengths.
+        </description>
+		<param-name>org.apache.myfaces.SECRET</param-name>
+		<param-value>NzY1NDMyMTA=</param-value>
+	</context-param>
+
+	<!-- NECESARIO PARA QUE LA FECHA NO APAREZCA CON UN DIA MENOS -->
+	<context-param>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- Welcome Page -->
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>faces/sections/inicio.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<!-- JSF Servlet is defined to container -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	
+	 <filter>
+      <display-name>AppEngine Bug 8145 Work Around</display-name>
+      <description>
+      Suppresses the If Modified Since header until GAE bug 8145 is fixed.
+      </description>
+      <filter-name>GAEBug8145WorkAround</filter-name>
+      <filter-class>es.afifuen.config.HttpIfModifiedSinceFix</filter-class>
+   </filter>
+  
+
+   <filter-mapping>
+      <filter-name>GAEBug8145WorkAround</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
+	
+
+	<!-- PRIMEFACES CONTEXT THEME -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bluesky</param-value>
+	</context-param>
+	
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+	
+	<error-page>
+	    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+	    <location>/faces/sections/inicio.xhtml</location>
+	</error-page>
+	
+	 <!-- Configure java.util.logging -->
+  	<system-properties>
+    	<property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+  	</system-properties>
+
+</web-app>
