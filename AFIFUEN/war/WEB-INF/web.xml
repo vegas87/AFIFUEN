@@ -149,7 +149,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<!-- PRIMEFACES CONTEXT THEME -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>bluesky</param-value>
+		<param-value>redmond</param-value>
 	</context-param>
 	
 	<session-config>
