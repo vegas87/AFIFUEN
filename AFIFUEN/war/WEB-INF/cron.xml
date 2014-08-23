@@ -5,4 +5,14 @@
     <schedule>every 6 hours</schedule>
     <timezone>Europe/Madrid</timezone>
   </cron>
+  <cron>
+    <url>/faces/sections/actividades/actividades.xhtml</url>
+    <schedule>every 6 hours</schedule>
+    <timezone>Europe/Madrid</timezone>
+  </cron>
+  <cron>
+    <url>/faces/sections/talleres/talleresYCursos.xhtml</url>
+    <schedule>every 6 hours</schedule>
+    <timezone>Europe/Madrid</timezone>
+  </cron>
 </cronentries>
